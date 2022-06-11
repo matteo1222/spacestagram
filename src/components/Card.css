@@ -1,13 +1,37 @@
 .Card {
-  width: 20rem;
-  max-width: 20rem;
+  --color-card: #fff;
+  --color-date: rgb(94, 94, 94);
+  width: 100%;
+  max-width: 30rem;
   /* height: 15rem; */
   /* max-width: 15rem; */
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
+  margin: 1rem 0;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  background: var(--color-card);
+  box-shadow: 0.2rem 0.2rem 0.5rem 0 var(--color-shadow);
+}
+
+.Card__Title {
+  margin: 1rem;
 }
 
 .Card__Image {
   width: 100%;
-  height: 10rem;
+  height: 50%;
   object-fit: cover;
+}
+
+.Card__TextContainer {
+  padding: 1rem;
+}
+
+.Card__Description {
+  line-height: 1.2rem;
+}
+
+.Card__Date {
+  font-size: 0.8rem;
+  color: var(--color-date);
 }

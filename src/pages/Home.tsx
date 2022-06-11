@@ -2,6 +2,7 @@ import React from 'react'
 import { fetchPictures } from '../api/fetchPictures';
 import Card from '../components/Card';
 import { useInfiniteQuery } from 'react-query'
+import './Home.css';
 
 
 interface NASAResponse {
@@ -33,10 +34,10 @@ function Home() {
   }
   return (
     <div className='Home'>
-      <header>
-        <h1>Spacestagram</h1>
-      </header>
-      <main>
+      <nav className='NavBar'>
+        <h1 className='NavBar__Title'>Spacestagram</h1>
+      </nav>
+      <main className='Card__Container'>
         {pictures()}
       </main>
     </div>
