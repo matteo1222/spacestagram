@@ -1,0 +1,13 @@
+.Card {
+  width: 20rem;
+  max-width: 20rem;
+  /* height: 15rem; */
+  /* max-width: 15rem; */
+  border: 1px solid #000;
+}
+
+.Card__Image {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+}

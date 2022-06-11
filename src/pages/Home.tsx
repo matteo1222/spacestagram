@@ -3,6 +3,15 @@ import { fetchPictures } from '../api/fetchPictures';
 import Card from '../components/Card';
 import { useInfiniteQuery } from 'react-query'
 
+
+interface NASAResponse {
+  copyright: string,
+  title: string,
+  url: string,
+  date: string,
+  explanation: string
+}
+
 function Home() {
   const startDate = '2022-5-31'
   const endDate = '2022-6-2'
@@ -18,10 +27,12 @@ function Home() {
     if (picturesQuery.status === 'error') {
       return <p>Error: {picturesQuery.error.message}</p>
     }
-    return <p>Gogo</p>
+    return [...picturesQuery.data.pages[0]].reverse().map((el: NASAResponse) => (
+      <Card title={el.title} imgSrc={el.url} date={el.date} description={el.explanation} />
+    ))
   }
   return (
-    <div>
+    <div className='Home'>
       <header>
         <h1>Spacestagram</h1>
       </header>
