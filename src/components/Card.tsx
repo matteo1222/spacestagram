@@ -1,5 +1,6 @@
 import React from 'react'
 import './Card.css'
+import { format } from 'date-fns'
 
 interface Props {
   title: string,
@@ -8,6 +9,7 @@ interface Props {
   description: string
 }
 
+// TODO check props date string is valid?
 function Card(props: Props) {
   return (
     <article className='Card'>
@@ -15,7 +17,7 @@ function Card(props: Props) {
       <img className='Card__Image' src={props.imgSrc} alt={props.description}/>
       <div className='Card__TextContainer'>
         <p className='Card__Description'>{props.description}</p>
-        <time className='Card__Date'>{props.date}</time>
+        <time className='Card__Date'>{format(new Date(props.date), 'dd MMMM yyyy')}</time>
       </div>
     </article>
   )
