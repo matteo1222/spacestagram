@@ -29,13 +29,14 @@ function Home() {
       return <p>Error: {picturesQuery.error.message}</p>
     }
     return [...picturesQuery.data.pages[0]].reverse().map((el: NASAResponse) => (
-      <Card title={el.title} imgSrc={el.url} date={el.date} description={el.explanation} />
+      <Card copyright={el.copyright} title={el.title} imgSrc={el.url} date={el.date} description={el.explanation} />
     ))
   }
   return (
     <div className='Home'>
       <nav className='NavBar'>
         <h1 className='NavBar__Title'>Spacestagram</h1>
+        <h2 className='NavBar__SubTitle'>Brought to you by NASA's Astronomy Picture of the Day (APOD)</h2>
       </nav>
       <main className='Card__Container'>
         {pictures()}

@@ -1,6 +1,6 @@
 :root {
   --color-bg: #fafafa;
-  --navbar-height: 4rem;
+  --navbar-height: 6rem;
   --color-navbar: #fff;
   --color-shadow: rgb(164, 164, 164);
 }
@@ -17,6 +17,7 @@ html, body {
 
 .Home {
   position: relative;
+  top: var(--navbar-height);
   background: var(--color-bg);
   display: flex;
   flex-direction: column;
@@ -31,7 +32,8 @@ html, body {
   /* border: 1px solid black; */
   background: var(--color-navbar);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   padding: 0.5rem 1rem;
   box-shadow: 0.2rem 0 0.5rem 0 var(--color-shadow);
   z-index: 2;
@@ -41,8 +43,13 @@ html, body {
   margin: 0;
 }
 
+.NavBar__SubTitle {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
 .Card__Container {
   position: relative;
   padding: 0 1rem;
-  top: var(--navbar-height);
 }

@@ -3,6 +3,7 @@ import './Card.css'
 import { format } from 'date-fns'
 
 interface Props {
+  copyright: string,
   title: string,
   imgSrc: string,
   date: string,
@@ -13,7 +14,8 @@ interface Props {
 function Card(props: Props) {
   return (
     <article className='Card'>
-      <h2 className='Card__Title'>{props.title}</h2>
+      <h3 className='Card__Title'>{props.title}</h3>
+      <h4 className='Card__SubTitle'>Copyright: {props.copyright}</h4>
       <img className='Card__Image' src={props.imgSrc} alt={props.description}/>
       <div className='Card__TextContainer'>
         <p className='Card__Description'>{props.description}</p>
