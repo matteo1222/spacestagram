@@ -5,16 +5,22 @@ import { useInfiniteQuery } from 'react-query'
 import './Home.css';
 
 
+export enum MediaType {
+  image = 'image',
+  video = 'video'
+}
+
 interface NASAResponse {
   copyright: string,
   title: string,
   url: string,
   date: string,
-  explanation: string
+  explanation: string,
+  media_type: MediaType
 }
 
 function Home() {
-  const startDate = '2022-5-31'
+  const startDate = '2022-5-15'
   const endDate = '2022-6-2'
   const picturesQuery:any = useInfiniteQuery(['pictures', { startDate, endDate }], fetchPictures, {
     getNextPageParam: (lastPage: any, pages) => lastPage.cursor
@@ -28,8 +34,16 @@ function Home() {
     if (picturesQuery.status === 'error') {
       return <p>Error: {picturesQuery.error.message}</p>
     }
-    return [...picturesQuery.data.pages[0]].reverse().map((el: NASAResponse) => (
-      <Card copyright={el.copyright} title={el.title} imgSrc={el.url} date={el.date} description={el.explanation} />
+    return [...picturesQuery.data.pages[0]].reverse().map((el: NASAResponse, idx) => (
+      <Card
+        key={idx}
+        copyright={el.copyright}
+        title={el.title}
+        src={el.url}
+        date={el.date}
+        description={el.explanation}
+        mediaType={el.media_type}
+      />
     ))
   }
   return (

@@ -17,6 +17,7 @@ html, body {
 
 .Home {
   position: relative;
+  min-height: 100vh;
   top: var(--navbar-height);
   background: var(--color-bg);
   display: flex;
