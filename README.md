@@ -1,6 +1,6 @@
 # Spacestagram
 
-This project was built using NASA's API - Astronomy Picture of the Day (APOD).
+This project was built using NASA's API - Astronomy Picture of the Day (APOD). Demo hosted at https://main--gentle-horse-d75398.netlify.app/
 
 ## Features
 - Infinite Scrolling that loads more Astronomy Picture of the Day 
