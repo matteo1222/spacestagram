@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { QueryClient, QueryClientProvider } from 'react-query'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Home from './pages/Home';
 
 const queryClient = new QueryClient()

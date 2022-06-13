@@ -3,6 +3,9 @@
   --navbar-height: 6rem;
   --color-navbar: #fff;
   --color-shadow: rgb(164, 164, 164);
+  --color-see-more-button: rgb(94, 94, 94);
+  --color-date: rgb(94, 94, 94);
+  --color-card: #fff;
 }
 
 * {

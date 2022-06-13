@@ -47,7 +47,7 @@ function Home() {
     console.log('data', picturesQuery.data)
     if (picturesQuery.status === 'loading') {
       return (
-        <Card />
+        new Array(2).fill(null).map((_el, idx) => <Card key={idx}/>)
       )
     }
     if (picturesQuery.status === 'error') {
@@ -69,7 +69,7 @@ function Home() {
     <div className='Home'>
       <nav className='NavBar'>
         <h1 className='NavBar__Title'>Spacestagram</h1>
-        <h2 className='NavBar__SubTitle'>Brought to you by NASA's Astronomy Picture of the Day (APOD)</h2>
+        <h2 className='NavBar__SubTitle'>NASA's Astronomy Picture of the Day</h2>
       </nav>
       <main className='Card__Container'>
         {/* <button onClick={() => picturesQuery.fetchNextPage()}>Fetch More</button> */}

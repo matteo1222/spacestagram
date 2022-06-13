@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { MediaType } from '../pages/Home'
 import Media from './Media'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import TruncateMultiLineWithSeeMore from './TruncateMultiLineWithSeeMore'
 
 interface Props {
   copyright?: string,
@@ -28,7 +28,9 @@ function Card(props: Props) {
         <Skeleton height={320} />
       }
       <div className='Card__TextContainer'>
-        <p className='Card__Description'>{props.description || <Skeleton count={5} />}</p>
+        <TruncateMultiLineWithSeeMore isLoading={!props.src}>
+          <p className='Card__Description'>{props.description || <Skeleton count={3} />}</p>
+        </TruncateMultiLineWithSeeMore>
         <time className='Card__Date'>{props.date ? format(new Date(props.date), 'dd MMMM yyyy') : <Skeleton width='20%' />}</time>
       </div>
     </article>

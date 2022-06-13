@@ -1,6 +1,4 @@
 .Card {
-  --color-card: #fff;
-  --color-date: rgb(94, 94, 94);
   width: 100%;
   /* height: 15rem; */
   /* max-width: 15rem; */
@@ -32,9 +30,9 @@
   padding: 1rem;
 }
 
-/* consider cross browser issue*/
+/* TODO: consider cross browser issue*/
 .Card__Description {
-  line-height: 1.2rem; 
+  line-height: 1.2rem;
 }
 
 .Card__Date {
