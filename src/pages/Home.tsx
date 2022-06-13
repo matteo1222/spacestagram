@@ -46,6 +46,7 @@ function Home() {
     staleTime: Infinity,
     cacheTime: CACHE_TIME
   })
+
   function handleLike(pictureId?: string) {
     if (!pictureId) return
     let newLikedPictures = []
@@ -61,14 +62,17 @@ function Home() {
     // save liked history
     saveLikedPictures(newLikedPictures)
   }
+
   function saveLikedPictures(ids: string[]) {
     window.localStorage.setItem('likedPictures', JSON.stringify(ids))
   }
+
   function loadLikedPictures() {
     const likedPictures = window.localStorage.getItem('likedPictures')
     if (!likedPictures || typeof likedPictures !== 'string') return []
     return JSON.parse(likedPictures)
   }
+
   function pictures() {
     if (picturesQuery.status === 'loading') {
       return (
@@ -78,19 +82,29 @@ function Home() {
     if (picturesQuery.status === 'error') {
       return <p>Error: {picturesQuery.error.message}</p>
     }
-    return [...picturesQuery.data.pages.flat()].reverse().map((el: NASAResponse) => (
-      <Card
-        key={el.date}
-        copyright={el.copyright}
-        title={el.title}
-        src={el.url}
-        date={el.date}
-        description={el.explanation}
-        mediaType={el.media_type}
-        liked={likedPictures.includes(el.date)}
-        handleLike={handleLike}
-      />
-    ))
+    return (
+      <InfiniteScroll
+          dataLength={picturesQuery.data?.pages.length * BATCH_FETCH_DAYS}
+          next={picturesQuery.fetchNextPage}
+          hasMore={picturesQuery.hasNextPage}
+          loader={<div style={{ display: 'flex', justifyContent: 'center'}}><Oval width='20' height='20' color='grey' ariaLabel='Loading'/></div>}
+        >
+        {
+          [...picturesQuery.data.pages.flat()].reverse().map((el: NASAResponse) => (
+          <Card
+            key={el.date}
+            copyright={el.copyright}
+            title={el.title}
+            src={el.url}
+            date={el.date}
+            description={el.explanation}
+            mediaType={el.media_type}
+            liked={likedPictures.includes(el.date)}
+            handleLike={handleLike}
+          />))
+        }
+      </InfiniteScroll>
+    )
   }
   return (
     <div className='Home'>
@@ -99,14 +113,7 @@ function Home() {
         <h2 className='NavBar__SubTitle'>NASA's Astronomy Picture of the Day</h2>
       </nav>
       <main className='Card__Container'>
-        <InfiniteScroll
-          dataLength={picturesQuery.data?.pages.length * BATCH_FETCH_DAYS}
-          next={picturesQuery.fetchNextPage}
-          hasMore={picturesQuery.hasNextPage}
-          loader={<div style={{ display: 'flex', justifyContent: 'center'}}><Oval width='20' height='20' color='grey' ariaLabel='Loading'/></div>}
-        >
-          {pictures()}
-        </InfiniteScroll>
+        {pictures()}
       </main>
     </div>
   )
