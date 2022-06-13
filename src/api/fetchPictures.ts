@@ -13,7 +13,6 @@ interface PictureQueryFunctionContext extends QueryFunctionContext {
 
 // TODO: figure out Typescript context type
 export async function fetchPictures(context: any) {
-  console.log('context', context)
   if (!context.pageParam) context.pageParam = 0
   const startDate = format(addDays(new Date(), -BATCH_FETCH_DAYS * (context.pageParam + 1) + 1), 'yyyy-MM-dd')
   const endDate = format(addDays(new Date(), -BATCH_FETCH_DAYS * context.pageParam), 'yyyy-MM-dd')

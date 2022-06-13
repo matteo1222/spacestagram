@@ -4,7 +4,7 @@ import Card from '../components/Card';
 import { useInfiniteQuery } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import './Home.css';
-import { BATCH_FETCH_DAYS, EARLIEST_AVAILABLE_DATE } from '../constants';
+import { BATCH_FETCH_DAYS, EARLIEST_AVAILABLE_DATE, CACHE_TIME } from '../constants';
 import { addDays } from 'date-fns'
 import { Oval } from  'react-loader-spinner'
 
@@ -41,10 +41,11 @@ function Home() {
         return undefined
       }
       return pages.length
-    }
+    },
+    staleTime: Infinity,
+    cacheTime: CACHE_TIME
   })
   function handleLike(pictureId?: string) {
-    console.log('likedPictues', likedPictures)
     if (!pictureId) return
     let newLikedPictures = []
     if (likedPictures.includes(pictureId)) {
@@ -68,7 +69,6 @@ function Home() {
     return JSON.parse(likedPictures)
   }
   function pictures() {
-    console.log('data', picturesQuery.data)
     if (picturesQuery.status === 'loading') {
       return (
         new Array(2).fill(null).map((_el, idx) => <Card key={idx}/>)
