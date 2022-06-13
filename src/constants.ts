@@ -1,0 +1,2 @@
+export const BATCH_FETCH_DAYS = 20
+export const EARLIEST_AVAILABLE_DATE = '1995-06-16'

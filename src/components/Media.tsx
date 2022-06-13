@@ -11,7 +11,12 @@ interface Props {
 function Media(props: Props) {
   if (props.mediaType === 'image') {
     return (
-      <img className='Card__Image' src={props.src} alt={props.alt}/>
+      <img
+        className='Card__Image'
+        src={props.src}
+        alt={props.alt}
+        loading='lazy'
+      />
     )
   }
   if (props.mediaType === 'video') {
