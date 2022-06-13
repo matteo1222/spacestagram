@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { fetchPictures } from '../api/fetchPictures';
 import Card from '../components/Card';
 import { useInfiniteQuery } from 'react-query'
@@ -29,6 +29,7 @@ function exceedsEarliestAvailableDate(pageLength: number) {
 }
 
 function Home() {
+  const [likedPictures, setLikedPictures] = useState<string[]>(loadLikedPictures)
   // TODO: use queryType
   const picturesQuery:any = useInfiniteQuery('pictures', fetchPictures, {
     select: data => ({
@@ -42,7 +43,30 @@ function Home() {
       return pages.length
     }
   })
-
+  function handleLike(pictureId?: string) {
+    console.log('likedPictues', likedPictures)
+    if (!pictureId) return
+    let newLikedPictures = []
+    if (likedPictures.includes(pictureId)) {
+      // remove from liked pictures
+      newLikedPictures = likedPictures.filter(picture => picture !== pictureId)
+      setLikedPictures(newLikedPictures)
+    } else {
+      // add to liked pictures
+      newLikedPictures = [...likedPictures, pictureId]
+      setLikedPictures(newLikedPictures)
+    }
+    // save liked history
+    saveLikedPictures(newLikedPictures)
+  }
+  function saveLikedPictures(ids: string[]) {
+    window.localStorage.setItem('likedPictures', JSON.stringify(ids))
+  }
+  function loadLikedPictures() {
+    const likedPictures = window.localStorage.getItem('likedPictures')
+    if (!likedPictures || typeof likedPictures !== 'string') return []
+    return JSON.parse(likedPictures)
+  }
   function pictures() {
     console.log('data', picturesQuery.data)
     if (picturesQuery.status === 'loading') {
@@ -53,15 +77,17 @@ function Home() {
     if (picturesQuery.status === 'error') {
       return <p>Error: {picturesQuery.error.message}</p>
     }
-    return [...picturesQuery.data.pages.flat()].reverse().map((el: NASAResponse, idx) => (
+    return [...picturesQuery.data.pages.flat()].reverse().map((el: NASAResponse) => (
       <Card
-        key={idx}
+        key={el.date}
         copyright={el.copyright}
         title={el.title}
         src={el.url}
         date={el.date}
         description={el.explanation}
         mediaType={el.media_type}
+        liked={likedPictures.includes(el.date)}
+        handleLike={handleLike}
       />
     ))
   }

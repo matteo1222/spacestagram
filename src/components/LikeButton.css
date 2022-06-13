@@ -1,0 +1,40 @@
+.LikeButton {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  color: var(--color-like-button);
+  font-size: 1.4rem;
+  animation: unlike-animation 0.2s ease-in-out;
+}
+
+@keyframes unlike-animation {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.LikeButton:hover {
+  cursor: pointer;
+}
+
+.LikeButton--Liked {
+  color: var(--color-like-button-liked);
+  animation: like-animation 0.2s ease-in-out;
+}
+
+@keyframes like-animation {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

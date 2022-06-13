@@ -6,6 +6,8 @@
   --color-see-more-button: rgb(94, 94, 94);
   --color-date: rgb(94, 94, 94);
   --color-card: #fff;
+  --color-like-button: black;
+  --color-like-button-liked: #fc6b6b;
 }
 
 * {
