@@ -53,4 +53,8 @@ html, body {
 .Card__Container {
   position: relative;
   padding: 0 1rem;
+  width: 100%;
+  max-width: 32rem;
+  display: flex;
+  flex-direction: column;
 }

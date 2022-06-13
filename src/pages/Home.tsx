@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import './Home.css';
 import { BATCH_FETCH_DAYS, EARLIEST_AVAILABLE_DATE } from '../constants';
 import { addDays } from 'date-fns'
+import { Oval } from  'react-loader-spinner'
 
 export enum MediaType {
   image = 'image',
@@ -45,7 +46,9 @@ function Home() {
   function pictures() {
     console.log('data', picturesQuery.data)
     if (picturesQuery.status === 'loading') {
-      return <p>Loading...</p>
+      return (
+        <Card />
+      )
     }
     if (picturesQuery.status === 'error') {
       return <p>Error: {picturesQuery.error.message}</p>
@@ -74,7 +77,7 @@ function Home() {
           dataLength={picturesQuery.data?.pages.length * BATCH_FETCH_DAYS}
           next={picturesQuery.fetchNextPage}
           hasMore={picturesQuery.hasNextPage}
-          loader={<h4>Loading...</h4>}
+          loader={<div style={{ display: 'flex', justifyContent: 'center'}}><Oval width='20' height='20' color='grey' ariaLabel='Loading'/></div>}
         >
           {pictures()}
         </InfiniteScroll>
