@@ -98,7 +98,6 @@ function Home() {
         <h2 className='NavBar__SubTitle'>NASA's Astronomy Picture of the Day</h2>
       </nav>
       <main className='Card__Container'>
-        {/* <button onClick={() => picturesQuery.fetchNextPage()}>Fetch More</button> */}
         <InfiniteScroll
           dataLength={picturesQuery.data?.pages.length * BATCH_FETCH_DAYS}
           next={picturesQuery.fetchNextPage}

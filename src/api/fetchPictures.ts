@@ -6,13 +6,8 @@ const API_KEY = process.env.REACT_APP_NASA_KEY
 const BASE_URL = 'https://api.nasa.gov/planetary/apod'
 
 // TODO: write a Netlify function to make NASA API request to hide the API Key
-
-interface PictureQueryFunctionContext extends QueryFunctionContext {
-  queryKey: [string, { startDate: string, endDate: string }]
-}
-
 // TODO: figure out Typescript context type
-export async function fetchPictures(context: any) {
+export async function fetchPictures(context: QueryFunctionContext) {
   if (!context.pageParam) context.pageParam = 0
   const startDate = format(addDays(new Date(), -BATCH_FETCH_DAYS * (context.pageParam + 1) + 1), 'yyyy-MM-dd')
   const endDate = format(addDays(new Date(), -BATCH_FETCH_DAYS * context.pageParam), 'yyyy-MM-dd')

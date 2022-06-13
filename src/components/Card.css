@@ -30,7 +30,6 @@
   padding: 1rem;
 }
 
-/* TODO: consider cross browser issue*/
 .Card__Description {
   line-height: 1.2rem;
 }

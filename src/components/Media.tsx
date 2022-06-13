@@ -15,7 +15,7 @@ function Media(props: Props) {
         className='Card__Image'
         src={props.src}
         alt={props.alt}
-        loading='eager'
+        loading='lazy'
       />
     )
   }
