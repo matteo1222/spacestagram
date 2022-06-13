@@ -7,6 +7,7 @@ import './Home.css';
 import { BATCH_FETCH_DAYS, EARLIEST_AVAILABLE_DATE, CACHE_TIME } from '../constants';
 import { addDays } from 'date-fns'
 import { Oval } from  'react-loader-spinner'
+import { AiFillRocket } from 'react-icons/ai'
 
 export enum MediaType {
   image = 'image',
@@ -21,7 +22,7 @@ interface NASAResponse {
   explanation: string,
   media_type: MediaType
 }
-// TODO: write a test to test it, test it
+// TODO: write a test to test it
 function exceedsEarliestAvailableDate(pageLength: number) {
     // calculate if the next page exceed the earliest available date
     const endDate = addDays(new Date(), -BATCH_FETCH_DAYS * pageLength)
@@ -94,7 +95,7 @@ function Home() {
   return (
     <div className='Home'>
       <nav className='NavBar'>
-        <h1 className='NavBar__Title'>Spacestagram</h1>
+        <h1 className='NavBar__Title'>Spacestagram<AiFillRocket/></h1>
         <h2 className='NavBar__SubTitle'>NASA's Astronomy Picture of the Day</h2>
       </nav>
       <main className='Card__Container'>

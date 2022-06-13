@@ -1,25 +1,3 @@
-:root {
-  --color-bg: #fafafa;
-  --navbar-height: 6rem;
-  --color-navbar: #fff;
-  --color-shadow: rgb(164, 164, 164);
-  --color-see-more-button: rgb(94, 94, 94);
-  --color-date: rgb(94, 94, 94);
-  --color-card: #fff;
-  --color-like-button: black;
-  --color-like-button-liked: #fc6b6b;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-}
-
 .Home {
   position: relative;
   min-height: 100vh;
