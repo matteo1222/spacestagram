@@ -2,9 +2,9 @@ import React from 'react'
 import { MediaType } from '../pages/Home'
 
 interface Props {
-  mediaType: MediaType,
-  className: string,
-  src: string,
+  mediaType: MediaType
+  className: string
+  src: string
   alt?: string
 }
 
@@ -12,23 +12,21 @@ function Media(props: Props) {
   if (props.mediaType === 'image') {
     return (
       <img
-        className='Card__Image'
+        className={props.className}
         src={props.src}
         alt={props.alt}
-        loading='lazy'
+        loading="lazy"
       />
     )
   }
   if (props.mediaType === 'video') {
     return (
       <iframe
-        width='100%'
-        height='320'
+        className={props.className}
         src={props.src}
-        frameBorder='0'
-        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+        allow="autoplay; encrypted-media; picture-in-picture"
         allowFullScreen
-        title='Embedded youtube'
+        title="Embedded youtube"
       />
     )
   }
