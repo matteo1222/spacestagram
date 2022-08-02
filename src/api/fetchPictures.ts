@@ -6,7 +6,6 @@ const API_KEY = process.env.REACT_APP_NASA_KEY
 const BASE_URL = 'https://api.nasa.gov/planetary/apod'
 
 // TODO: write a Netlify function to make NASA API request to hide the API Key
-// TODO: figure out Typescript context type
 async function checkIfTodayHasPicture() {
   const todayDate = format(new Date(), 'yyyy-MM-dd')
   const response = await fetch(`${BASE_URL}?api_key=${API_KEY}&date=${todayDate}`)
