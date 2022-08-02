@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import './TruncateMultiLineWithSeeMore.css'
 import Skeleton from 'react-loading-skeleton'
+import { useEffect } from 'react'
 
 interface Props {
   children: React.ReactElement
@@ -12,18 +13,22 @@ const LIMITED_TEXT_LENGTH = 33
 // TODO: check if the description need to be extended
 function TruncateMultiLineWithSeeMore(props: Props) {
   const [extended, setExtended] = useState(false)
+  const [exceedLimitedTextLength, setExceedLimitedTextLength] = useState(false)
   const textRef = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    if (!textRef.current) return
+
+    setExceedLimitedTextLength(
+      (textRef.current.textContent ? textRef.current.textContent.length : 0) >
+        LIMITED_TEXT_LENGTH
+    )
+  }, [textRef])
+
   function seeMoreButton() {
     if (props.isLoading) {
       return <Skeleton width="20%" />
     }
-
-    if (!textRef.current) {
-      return <Skeleton width="20%" />
-    }
-    const exceedLimitedTextLength =
-      (textRef.current.textContent ? textRef.current.textContent.length : 0) >
-      LIMITED_TEXT_LENGTH
 
     if (!extended && exceedLimitedTextLength) {
       return (
