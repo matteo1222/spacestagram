@@ -10,7 +10,6 @@ interface Props {
 
 const LIMITED_TEXT_LENGTH = 33
 
-// TODO: check if the description need to be extended
 function TruncateMultiLineWithSeeMore(props: Props) {
   const [extended, setExtended] = useState(false)
   const [exceedLimitedTextLength, setExceedLimitedTextLength] = useState(false)
