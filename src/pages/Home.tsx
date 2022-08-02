@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { fetchPictures } from '../api/fetchPictures'
 import Card from '../components/Card'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery, UseInfiniteQueryResult } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import './Home.css'
 import {
@@ -36,21 +36,22 @@ function exceedsEarliestAvailableDate(pageLength: number) {
 function Home() {
   const [likedPictures, setLikedPictures] =
     useState<string[]>(loadLikedPictures)
-  // TODO: use queryType
-  const picturesQuery: any = useInfiniteQuery('pictures', fetchPictures, {
-    select: (data) => ({
-      pages: [...data.pages].reverse(),
-      pageParams: [...data.pageParams].reverse()
-    }),
-    getNextPageParam: (lastPage, pages) => {
-      if (exceedsEarliestAvailableDate(pages.length)) {
-        return undefined
-      }
-      return pages.length
-    },
-    staleTime: Infinity,
-    cacheTime: CACHE_TIME
-  })
+
+  const picturesQuery: UseInfiniteQueryResult<NASAResponse[], Error> =
+    useInfiniteQuery<NASAResponse[], Error>('pictures', fetchPictures, {
+      select: (data) => ({
+        pages: [...data.pages].reverse(),
+        pageParams: [...data.pageParams].reverse()
+      }),
+      getNextPageParam: (lastPage, pages) => {
+        if (exceedsEarliestAvailableDate(pages.length)) {
+          return undefined
+        }
+        return pages.length
+      },
+      staleTime: Infinity,
+      cacheTime: CACHE_TIME
+    })
 
   function handleLike(pictureId?: string) {
     if (!pictureId) return
@@ -81,7 +82,11 @@ function Home() {
   }
 
   function pictures() {
-    if (picturesQuery.status === 'loading') {
+    if (
+      picturesQuery.status === 'loading' ||
+      !picturesQuery.data?.pages.length ||
+      !picturesQuery.hasNextPage
+    ) {
       return new Array(2).fill(null).map((_el, idx) => <Card key={idx} />)
     }
     if (picturesQuery.status === 'error') {
