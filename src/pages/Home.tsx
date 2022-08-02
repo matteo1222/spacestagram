@@ -84,8 +84,8 @@ function Home() {
   function pictures() {
     if (
       picturesQuery.status === 'loading' ||
-      !picturesQuery.data?.pages.length ||
-      !picturesQuery.hasNextPage
+      picturesQuery.data?.pages === undefined ||
+      picturesQuery.hasNextPage === undefined
     ) {
       return new Array(2).fill(null).map((_el, idx) => <Card key={idx} />)
     }
