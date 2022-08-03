@@ -12,6 +12,7 @@ import {
 import { addDays } from 'date-fns'
 import { Oval } from 'react-loader-spinner'
 import { AiFillRocket } from 'react-icons/ai'
+import { saveLikedPictures, loadLikedPictures } from '../utils'
 
 export enum MediaType {
   image = 'image',
@@ -69,16 +70,6 @@ function Home() {
     }
     // save liked history
     saveLikedPictures(newLikedPictures)
-  }
-
-  function saveLikedPictures(ids: string[]) {
-    window.localStorage.setItem('likedPictures', JSON.stringify(ids))
-  }
-
-  function loadLikedPictures() {
-    const likedPictures = window.localStorage.getItem('likedPictures')
-    if (!likedPictures || typeof likedPictures !== 'string') return []
-    return JSON.parse(likedPictures)
   }
 
   function pictures() {
