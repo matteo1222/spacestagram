@@ -2,8 +2,7 @@ import { QueryFunctionContext } from 'react-query'
 import { format, addDays } from 'date-fns'
 import { BATCH_FETCH_DAYS } from '../constants'
 
-const API_KEY = process.env.REACT_APP_NASA_KEY
-const BASE_URL = 'https://api.nasa.gov/planetary/apod'
+const BASE_URL = `${window.location.origin}/.netlify/functions/nasa`
 
 // TODO: write a Netlify function to make NASA API request to hide the API Key
 async function checkIfTodayHasPicture() {
@@ -11,9 +10,6 @@ async function checkIfTodayHasPicture() {
 
   const searchParams = new URLSearchParams();
 
-  if (API_KEY) {
-    searchParams.append('api_key', API_KEY)
-  }
   searchParams.append('date', todayDate)
 
   const response = await fetch(`${BASE_URL}?${searchParams.toString()}`)
@@ -37,9 +33,6 @@ export async function fetchPictures(context: QueryFunctionContext) {
 
   const searchParams = new URLSearchParams();
 
-  if (API_KEY) {
-    searchParams.append('api_key', API_KEY)
-  }
   searchParams.append('start_date', startDate)
   searchParams.append('end_date', endDate)
 
